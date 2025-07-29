@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <h1>Olá, mundo! Este é meu site na Vercel!</h1>
+      <h1>Olá, Daniel! Seu site está funcionando!</h1>
     </div>
-  )
+  );
 }
