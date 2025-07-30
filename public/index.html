@@ -3,37 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atualidades Econômicas</title>
+  <title>Portal de Economia - Daniel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #1a237e;
+    }
+    .menu {
+      margin-top: 30px;
+    }
+    .menu a {
+      display: block;
+      width: 220px;
+      margin: 10px auto;
+      padding: 12px;
+      text-decoration: none;
+      background-color: #1976d2;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .menu a:hover {
+      background-color: #0d47a1;
+    }
+  </style>
 </head>
 <body>
-  <h1>🌐 Atualidades Econômicas</h1>
-  <div id="atualidades">
-    <p>Carregando atualidades...</p>
+  <h1>📊 Bem-vindo ao Portal de Economia</h1>
+  <p>Acompanhe as últimas notícias, dicas e atualidades do mercado financeiro.</p>
+
+  <div class="menu">
+    <a href="noticias.html">📰 Notícias de Economia</a>
+    <a href="atualidades.html">🌐 Atualidades</a>
+    <a href="criptomoedas.html">💰 Criptomoedas</a>
+    <a href="dicas.html">💡 Dicas de Investimentos</a>
   </div>
-
-  <script>
-    async function carregarAtualidades() {
-      try {
-        const url = "https://newsapi.org/v2/top-headlines?country=br&category=business&language=pt&apiKey=c09bd385665f4340934c387ee23931da";
-        const resposta = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url));
-        const dados = await resposta.json();
-        const container = document.getElementById("atualidades");
-        container.innerHTML = "";
-
-        if (dados.articles && dados.articles.length > 0) {
-          dados.articles.slice(0, 5).forEach(noticia => {
-            const item = document.createElement("p");
-            item.innerHTML = `<a href="${noticia.url}" target="_blank">${noticia.title}</a>`;
-            container.appendChild(item);
-          });
-        } else {
-          container.innerHTML = "<p>Sem notícias disponíveis no momento.</p>";
-        }
-      } catch (error) {
-        document.getElementById("atualidades").innerText = "Erro ao carregar atualidades.";
-      }
-    }
-    carregarAtualidades();
-  </script>
 </body>
 </html>
