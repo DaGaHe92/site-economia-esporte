@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atualidades Econômicas</title>
+</head>
+<body>
+  <h1>🌐 Atualidades Econômicas</h1>
+  <div id="atualidades">
+    <p>Carregando atualidades...</p>
+  </div>
 
+  <script>
+    async function carregarAtualidades() {
+      try {
+        const resposta = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent("https://newsapi.org/v2/top-headlines?country=br&category=business&language=pt&apiKey=c09bd385665f4340934c387ee23931da"));
+        const dados = await resposta.json();
+        const container = document.getElementById("atualidades");
+        container.innerHTML = "";
+
+        dados.articles.slice(0, 5).forEach(noticia => {
+          const item = document.createElement("p");
+          item.innerHTML = `<a href="${noticia.url}" target="_blank">${noticia.title}</a>`;
+          container.appendChild(item);
+        });
+      } catch (error) {
+        document.getElementById("atualidades").innerText = "Erro ao carregar atualidades.";
+      }
+    }
+    carregarAtualidades();
+  </script>
+</body>
+</html>
