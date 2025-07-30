@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotações do Mercado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #1a237e;
+    }
+    .box {
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px auto;
+      width: 300px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .loading {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>💹 Cotações do Mercado</h1>
 
+  <div class="box" id="dolar">Carregando dólar...</div>
+  <div class="box" id="euro">Carregando euro...</div>
+  <div class="box" id="acoes">Carregando ações...</div>
+
+  <script>
+    async function carregarCotacoes() {
+      try {
+        // Cotação do dólar
+        let dolarResp = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+        let dolarData = await dolarResp.json();
+        document.getElementById("dolar").innerText =
+          "💵 Dólar: R$ " + (1 / dolarData.rates.BRL).toFixed(2);
+
+        // Cotação do euro
+        let euroResp = await fetch("https://api.exchangerate-api.com/v4/latest/EUR");
+        let euroData = await euroResp.json();
+        document.getElementById("euro").innerText =
+          "💶 Euro: R$ " + (1 / euroData.rates.BRL).toFixed(2);
+
+        // Ações da B3
+        let acoesResp = await fetch("https://brapi.dev/api/quote/PETR4,VALE3,ITUB4?range=1d&interval=1d");
+        let acoesData = await acoesResp.json();
+
+        let acoesHTML = "📈 Principais ações:<br>";
+        acoesData.results.forEach(acao => {
+          acoesHTML += `${acao.symbol}: R$ ${acao.regularMarketPrice}<br>`;
+        });
+
+        document.getElementById("acoes").innerHTML = acoesHTML;
+
+      } catch (error) {
+        document.getElementById("acoes").innerText = "Erro ao carregar cotações.";
+      }
+    }
+
+    carregarCotacoes();
+  </script>
+</body>
+</html>
