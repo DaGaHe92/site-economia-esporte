@@ -14,16 +14,21 @@
   <script>
     async function carregarAtualidades() {
       try {
-        const resposta = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent("https://newsapi.org/v2/top-headlines?country=br&category=business&language=pt&apiKey=c09bd385665f4340934c387ee23931da"));
+        const url = "https://newsapi.org/v2/top-headlines?country=br&category=business&language=pt&apiKey=c09bd385665f4340934c387ee23931da";
+        const resposta = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url));
         const dados = await resposta.json();
         const container = document.getElementById("atualidades");
         container.innerHTML = "";
 
-        dados.articles.slice(0, 5).forEach(noticia => {
-          const item = document.createElement("p");
-          item.innerHTML = `<a href="${noticia.url}" target="_blank">${noticia.title}</a>`;
-          container.appendChild(item);
-        });
+        if (dados.articles && dados.articles.length > 0) {
+          dados.articles.slice(0, 5).forEach(noticia => {
+            const item = document.createElement("p");
+            item.innerHTML = `<a href="${noticia.url}" target="_blank">${noticia.title}</a>`;
+            container.appendChild(item);
+          });
+        } else {
+          container.innerHTML = "<p>Sem notícias disponíveis no momento.</p>";
+        }
       } catch (error) {
         document.getElementById("atualidades").innerText = "Erro ao carregar atualidades.";
       }
