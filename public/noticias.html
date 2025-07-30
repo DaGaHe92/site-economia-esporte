@@ -2,12 +2,33 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Notícias de Economia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Últimas Notícias de Economia</title>
 </head>
 <body>
-  <h1>Últimas Notícias de Economia</h1>
-  <p>Acompanhe atualizações do mercado financeiro e da economia mundial.</p>
-  <a href="index.html">← Voltar para o início</a>
+  <h1>📰 Últimas Notícias de Economia</h1>
+  <div id="noticias">
+    <p>Carregando notícias automáticas...</p>
+  </div>
+
+  <script>
+    async function carregarNoticias() {
+      try {
+        const resposta = await fetch("https://newsapi.org/v2/everything?q=economia&language=pt&apiKey=SEU_TOKEN_AQUI");
+        const dados = await resposta.json();
+        const container = document.getElementById("noticias");
+        container.innerHTML = "";
+
+        dados.articles.slice(0, 5).forEach(noticia => {
+          const item = document.createElement("p");
+          item.innerHTML = `<a href="${noticia.url}" target="_blank">${noticia.title}</a>`;
+          container.appendChild(item);
+        });
+      } catch (error) {
+        document.getElementById("noticias").innerText = "Erro ao carregar notícias.";
+      }
+    }
+    carregarNoticias();
+  </script>
 </body>
 </html>
