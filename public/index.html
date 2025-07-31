@@ -3,47 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal de Economia - Daniel</title>
+  <title>Portal de Economia</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding-top: 60px;
       background-color: #f0f2f5;
       text-align: center;
-      padding: 50px;
     }
-    h1 {
-      color: #1a237e;
-    }
-    .menu {
-      margin-top: 30px;
-    }
-    .menu a {
-      display: block;
-      width: 220px;
-      margin: 10px auto;
-      padding: 12px;
-      text-decoration: none;
+    /* MENU FIXO */
+    .menu-fixo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       background-color: #1976d2;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .menu-fixo a {
       color: white;
-      border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
       transition: 0.3s;
     }
-    .menu a:hover {
+    .menu-fixo a:hover {
       background-color: #0d47a1;
+    }
+    /* CONTEÚDO */
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    footer {
+      margin-top: 20px;
+      padding: 10px;
+      background: #1976d2;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <h1>📊 Bem-vindo ao Portal de Economia</h1>
-  <p>Acompanhe as últimas notícias, dicas e atualidades do mercado financeiro.</p>
+  <nav class="menu-fixo">
+    <a href="/index.html">🏠 Início</a>
+    <a href="/noticias.html">📰 Notícias</a>
+    <a href="/atualidades.html">📊 Atualidades</a>
+    <a href="/criptomoedas.html">💰 Criptomoedas</a>
+    <a href="/dicas.html">💡 Dicas</a>
+  </nav>
 
-  <div class="menu">
-    <a href="noticias.html">📰 Notícias de Economia</a>
-    <a href="atualidades.html">🌐 Atualidades</a>
-    <a href="criptomoedas.html">💰 Criptomoedas</a>
-    <a href="dicas.html">💡 Dicas de Investimentos</a>
-    <a href="cotacoes.html">💹 Cotações do Mercado</a>
-  </div>
+  <main>
+    <h1>🌎 Portal de Economia</h1>
+    <p>Últimas notícias, cotações e dicas de investimentos em um só lugar</p>
+  </main>
+
+  <footer>
+    © 2025 Daniel Rodrigues - Todos os direitos reservados
+  </footer>
 </body>
 </html>
