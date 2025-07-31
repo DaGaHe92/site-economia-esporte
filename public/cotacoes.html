@@ -51,6 +51,10 @@
       font-weight: bold;
       color: #333;
     }
+    h2 {
+      margin-top: 20px;
+      color: #1976d2;
+    }
   </style>
 </head>
 <body>
@@ -65,33 +69,52 @@
   </nav>
 
   <h1>💹 Cotações em Tempo Real</h1>
-  <div id="lista-cotacoes">
+
+  <h2>💵 Moedas</h2>
+  <div id="lista-moedas">
+    <p>Carregando dados...</p>
+  </div>
+
+  <h2>📊 Ações da B3</h2>
+  <div id="lista-acoes">
     <p>Carregando dados...</p>
   </div>
 
   <script>
     async function carregarCotacoes() {
       try {
-        const resposta = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-USD");
-        const dados = await resposta.json();
+        // Cotação de moedas
+        const moedasResp = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-USD");
+        const moedas = await moedasResp.json();
 
-        const dolar = dados.USDBRL.bid;
-        const euro = dados.EURBRL.bid;
-        const bitcoin = dados.BTCUSD.bid;
+        // Ações brasileiras (utilizando API que funciona para PETR4, VALE3, ITUB4)
+        const acoesResp = await fetch("https://brapi.dev/api/quote/PETR4,VALE3,ITUB4");
+        const acoes = await acoesResp.json();
 
-        const container = document.getElementById("lista-cotacoes");
-        container.innerHTML = `
-          <div class="cotacao"><span>Dólar (USD):</span> R$ ${parseFloat(dolar).toFixed(2)}</div>
-          <div class="cotacao"><span>Euro (EUR):</span> R$ ${parseFloat(euro).toFixed(2)}</div>
-          <div class="cotacao"><span>Bitcoin (BTC):</span> US$ ${parseFloat(bitcoin).toFixed(2)}</div>
+        // Exibir moedas
+        const moedasHTML = `
+          <div class="cotacao"><span>Dólar (USD):</span> R$ ${parseFloat(moedas.USDBRL.bid).toFixed(2)}</div>
+          <div class="cotacao"><span>Euro (EUR):</span> R$ ${parseFloat(moedas.EURBRL.bid).toFixed(2)}</div>
+          <div class="cotacao"><span>Bitcoin (BTC):</span> US$ ${parseFloat(moedas.BTCUSD.bid).toFixed(2)}</div>
         `;
+
+        // Exibir ações (dados vindos da API BRAPI)
+        let acoesHTML = "";
+        acoes.results.forEach(acao => {
+          acoesHTML += `<div class="cotacao"><span>${acao.symbol}:</span> R$ ${parseFloat(acao.regularMarketPrice).toFixed(2)}</div>`;
+        });
+
+        document.getElementById("lista-moedas").innerHTML = moedasHTML;
+        document.getElementById("lista-acoes").innerHTML = acoesHTML;
+
       } catch (error) {
-        document.getElementById("lista-cotacoes").innerText = "Erro ao carregar cotações.";
+        document.getElementById("lista-moedas").innerText = "Erro ao carregar moedas.";
+        document.getElementById("lista-acoes").innerText = "Erro ao carregar ações.";
       }
     }
 
     carregarCotacoes();
-    setInterval(carregarCotacoes, 60000);
+    setInterval(carregarCotacoes, 60000); // Atualiza a cada 1 minuto
   </script>
 
 </body>
