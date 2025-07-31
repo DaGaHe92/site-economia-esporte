@@ -73,31 +73,26 @@
   <script>
     async function carregarCotacoes() {
       try {
-        // Cotações de moedas
-        const moedas = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL
-308 Permanent Redirect
-{"USDBRL":{"code":"USD","codein":"BRL","name":"Dólar Americano/Real Brasileiro","high":"5.6047","low":"5.5494","varBid":"0.04153","pctChange":"0.747481","bid":"5. ...
-economia.awesomeapi.com.br
-");
-        const dadosMoedas = await moedas.json();
+        const resposta = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=BRL,EUR");
+        const dados = await resposta.json();
 
-        // Simulação de Ibovespa (substituir por API oficial se disponível)
-        const ibov = (Math.random() * (130000 - 120000) + 120000).toFixed(2);
+        const usdBrl = dados.rates.BRL;
+        const eur = dados.rates.EUR;
 
         const container = document.getElementById("lista-cotacoes");
         container.innerHTML = "";
 
         const itens = [
-          {nome: "Dólar", valor: dadosMoedas.USDBRL?.bid},
-          {nome: "Euro", valor: dadosMoedas.EURBRL?.bid},
-          {nome: "Ibovespa (simulado)", valor: ibov}
+          {nome: "Dólar (USD)", valor: usdBrl},
+          {nome: "Euro (conversão 1 USD → EUR)", valor: eur},
+          {nome: "Ibovespa (simulado)", valor: (Math.random() * (130000 - 120000) + 120000).toFixed(2)}
         ];
 
         itens.forEach(item => {
           if (item.valor) {
             const div = document.createElement("div");
             div.classList.add("cotacao");
-            div.innerHTML = `<span>${item.nome}:</span> R$ ${parseFloat(item.valor).toLocaleString('pt-BR')}`;
+            div.innerHTML = `<span>${item.nome}:</span> ${item.nome.includes('Ibovespa') ? '' : 'R$ '}${parseFloat(item.valor).toFixed(2)}`;
             container.appendChild(div);
           }
         });
