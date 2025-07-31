@@ -68,10 +68,11 @@
   <script>
     async function carregarNoticiasRSS() {
       try {
-        const resposta = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://g1.globo.com/rss/g1/economia/"));
-        const dados = await resposta.json();
+        const url = "https://g1.globo.com/rss/g1/economia/";
+        const resposta = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url));
+        const texto = await resposta.text();
         const parser = new DOMParser();
-        const xml = parser.parseFromString(dados.contents, "text/xml");
+        const xml = parser.parseFromString(texto, "application/xml");
         const items = xml.querySelectorAll("item");
         const container = document.getElementById("noticias");
         container.innerHTML = "";
