@@ -9,51 +9,20 @@
       font-family: Arial, sans-serif;
       background-color: #f0f2f5;
       margin: 0;
-      padding-top: 60px;
+      padding: 20px;
       text-align: center;
     }
-    .menu-fixo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: #1976d2;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      z-index: 1000;
-    }
-    .menu-fixo a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    .menu-fixo a:hover {
-      background-color: #0d47a1;
-    }
-    iframe {
-      width: 95%;
-      height: 2000px;
-      border: none;
-      margin-top: 10px;
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="menu-fixo">
-    <a href="index.html">Início</a>
-    <a href="noticias.html">Notícias</a>
-    <a href="atualidades.html">Atualidades</a>
-    <a href="criptomoedas.html">Criptomoedas</a>
-  </div>
-
   <h1>📰 Últimas Notícias de Economia</h1>
 
-  <iframe src="https://news.google.com/rss/search?q=economia&hl=pt-BR&gl=BR&ceid=BR:pt-419"></iframe>
+  <!-- ✅ BLOCO AUTOMÁTICO DE NOTÍCIAS FUNCIONANDO -->
+  <script src="https://rss.app/embed/v1/news-wall/v1DkTZVJQK5w5eqb"></script>
 
 </body>
 </html>
