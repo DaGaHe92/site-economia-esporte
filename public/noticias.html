@@ -14,15 +14,55 @@
     }
     h1 {
       color: #333;
-      margin-bottom: 20px;
+    }
+    .noticia {
+      background: #fff;
+      margin: 10px auto;
+      padding: 10px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .noticia a {
+      text-decoration: none;
+      color: #1976d2;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <h1>📰 Últimas Notícias de Economia</h1>
+  <div id="listaNoticias">Carregando notícias...</div>
 
-  <!-- ✅ BLOCO AUTOMÁTICO DE NOTÍCIAS FUNCIONANDO -->
-  <script src="https://rss.app/embed/v1/news-wall/v1DkTZVJQK5w5eqb"></script>
+  <script>
+    async function carregarNoticias() {
+      try {
+        // Usando proxy para evitar bloqueio da Vercel
+        const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://g1.globo.com/rss/g1/economia/");
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(dados.contents, "text/xml");
+        const itens = xml.querySelectorAll("item");
+        let html = "";
 
+        itens.forEach((item, index) => {
+          if (index < 5) {
+            let titulo = item.querySelector("title").textContent;
+            let link = item.querySelector("link").textContent;
+            html += `<div class='noticia'><a href="${link}" target="_blank">${titulo}</a></div>`;
+          }
+        });
+
+        document.getElementById("listaNoticias").innerHTML = html;
+      } catch (e) {
+        document.getElementById("listaNoticias").innerHTML = "Erro ao carregar notícias.";
+      }
+    }
+
+    carregarNoticias();
+  </script>
 </body>
 </html>
