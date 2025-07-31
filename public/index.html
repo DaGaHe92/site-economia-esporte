@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portal de Economia</title>
   <style>
     body {
@@ -12,6 +12,7 @@
       background-color: #f0f2f5;
       text-align: center;
     }
+
     /* MENU FIXO */
     .menu-fixo {
       position: fixed;
@@ -24,8 +25,10 @@
       justify-content: center;
       gap: 15px;
       z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      flex-wrap: wrap; /* Permite quebra de linha no menu */
     }
+
     .menu-fixo a {
       color: white;
       text-decoration: none;
@@ -33,24 +36,48 @@
       padding: 8px 12px;
       border-radius: 5px;
       transition: 0.3s;
+      white-space: nowrap; /* Evita quebra dentro do link */
     }
+
     .menu-fixo a:hover {
       background-color: #0d47a1;
     }
-    /* CONTEÚDO */
+
+    /* CONTEÚDO PRINCIPAL */
     main {
       padding: 20px;
       max-width: 900px;
       margin: auto;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      text-align: left;
     }
+
+    /* RODAPÉ */
     footer {
       margin-top: 20px;
       padding: 10px;
       background: #1976d2;
       color: white;
+      text-align: center;
+    }
+
+    /* MELHORIAS MOBILE */
+    @media (max-width: 600px) {
+      .menu-fixo {
+        justify-content: center;
+        gap: 8px;
+        padding: 8px;
+      }
+      .menu-fixo a {
+        font-size: 14px;
+        padding: 6px 10px;
+      }
+      main {
+        padding: 10px;
+        margin: 5px;
+      }
     }
   </style>
 </head>
