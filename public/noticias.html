@@ -35,20 +35,11 @@
     .menu-fixo a:hover {
       background-color: #0d47a1;
     }
-    .noticia {
-      background: white;
-      padding: 10px;
-      margin: 10px auto;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      text-align: left;
-    }
-    a {
-      text-decoration: none;
-      color: #0d47a1;
-      font-weight: bold;
+    iframe {
+      width: 95%;
+      height: 2000px;
+      border: none;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -61,37 +52,8 @@
   </div>
 
   <h1>📰 Últimas Notícias de Economia</h1>
-  <div id="noticias">
-    <p>Carregando notícias automáticas...</p>
-  </div>
 
-  <script>
-    async function carregarNoticiasRSS() {
-      try {
-        const url = "https://g1.globo.com/rss/g1/economia/";
-        const resposta = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url));
-        const texto = await resposta.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(texto, "application/xml");
-        const items = xml.querySelectorAll("item");
-        const container = document.getElementById("noticias");
-        container.innerHTML = "";
+  <iframe src="https://news.google.com/rss/search?q=economia&hl=pt-BR&gl=BR&ceid=BR:pt-419"></iframe>
 
-        items.forEach((item, index) => {
-          if (index < 10) {
-            const titulo = item.querySelector("title").textContent;
-            const link = item.querySelector("link").textContent;
-            const div = document.createElement("div");
-            div.className = "noticia";
-            div.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
-            container.appendChild(div);
-          }
-        });
-      } catch (error) {
-        document.getElementById("noticias").innerText = "Erro ao carregar notícias.";
-      }
-    }
-    carregarNoticiasRSS();
-  </script>
 </body>
 </html>
