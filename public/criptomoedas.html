@@ -2,13 +2,100 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Criptomoedas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotações de Criptomoedas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding-top: 60px;
+      background-color: #f0f2f5;
+      text-align: center;
+    }
+    /* MENU FIXO */
+    .menu-fixo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #1976d2;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .menu-fixo a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .menu-fixo a:hover {
+      background-color: #0d47a1;
+    }
+    .coin {
+      background: white;
+      padding: 15px;
+      margin: 10px auto;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      text-align: left;
+    }
+    .coin span {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <h1>Notícias e Dicas sobre Criptomoedas</h1>
-  <p>Informações rápidas sobre Bitcoin, Ethereum e outras moedas digitais.</p>
-  <p>Dica do dia: Nunca invista mais do que pode perder!</p>
-  <a href="index.html">← Voltar para o início</a>
+
+  <!-- MENU FIXO -->
+  <nav class="menu-fixo">
+    <a href="index.html">🏠 Início</a>
+    <a href="noticias.html">📰 Notícias</a>
+    <a href="atualidades.html">🌐 Atualidades</a>
+    <a href="criptomoedas.html">💰 Criptomoedas</a>
+    <a href="dicas.html">💡 Dicas</a>
+    <a href="cotacoes.html">💹 Cotações</a>
+  </nav>
+
+  <!-- CONTEÚDO -->
+  <h1>💰 Cotações de Criptomoedas</h1>
+  <div id="lista-cripto">
+    <p>Carregando preços...</p>
+  </div>
+
+  <script>
+    async function carregarCriptos() {
+      try {
+        const resposta = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&ids=bitcoin,ethereum,binancecoin,cardano,ripple,solana&order=market_cap_desc");
+        const dados = await resposta.json();
+        const container = document.getElementById("lista-cripto");
+        container.innerHTML = "";
+
+        dados.forEach(coin => {
+          const item = document.createElement("div");
+          item.classList.add("coin");
+          item.innerHTML = `
+            <span>Nome:</span> ${coin.name} (${coin.symbol.toUpperCase()})<br>
+            <span>Preço:</span> R$ ${coin.current_price.toLocaleString('pt-BR')}<br>
+            <span>Variação 24h:</span> ${coin.price_change_percentage_24h.toFixed(2)}%
+          `;
+          container.appendChild(item);
+        });
+      } catch (error) {
+        document.getElementById("lista-cripto").innerText = "Erro ao carregar preços.";
+      }
+    }
+    carregarCriptos();
+    setInterval(carregarCriptos, 60000); // atualiza a cada 60 segundos
+  </script>
+
 </body>
 </html>
