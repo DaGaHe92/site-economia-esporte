@@ -55,7 +55,6 @@
 </head>
 <body>
 
-  <!-- MENU FIXO -->
   <nav class="menu-fixo">
     <a href="index.html">🏠 Início</a>
     <a href="noticias.html">📰 Notícias</a>
@@ -73,27 +72,18 @@
   <script>
     async function carregarCotacoes() {
       try {
-        // 1️⃣ Cotação Dólar (USD/BRL)
-        const dolarData = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=BRL");
-        const dolarJson = await dolarData.json();
-        const dolar = dolarJson.rates.BRL;
+        const resposta = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-USD");
+        const dados = await resposta.json();
 
-        // 2️⃣ Cotação Euro (EUR/BRL)
-        const euroData = await fetch("https://api.exchangerate.host/latest?base=EUR&symbols=BRL");
-        const euroJson = await euroData.json();
-        const euro = euroJson.rates.BRL;
+        const dolar = dados.USDBRL.bid;
+        const euro = dados.EURBRL.bid;
+        const bitcoin = dados.BTCUSD.bid;
 
-        // 3️⃣ Cotação Bitcoin (USD)
-        const btcData = await fetch("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
-        const btcJson = await btcData.json();
-        const bitcoin = btcJson.bpi.USD.rate_float;
-
-        // Exibir no site
         const container = document.getElementById("lista-cotacoes");
         container.innerHTML = `
-          <div class="cotacao"><span>Dólar (USD):</span> R$ ${dolar.toFixed(2)}</div>
-          <div class="cotacao"><span>Euro (EUR):</span> R$ ${euro.toFixed(2)}</div>
-          <div class="cotacao"><span>Bitcoin (BTC):</span> US$ ${bitcoin.toFixed(2)}</div>
+          <div class="cotacao"><span>Dólar (USD):</span> R$ ${parseFloat(dolar).toFixed(2)}</div>
+          <div class="cotacao"><span>Euro (EUR):</span> R$ ${parseFloat(euro).toFixed(2)}</div>
+          <div class="cotacao"><span>Bitcoin (BTC):</span> US$ ${parseFloat(bitcoin).toFixed(2)}</div>
         `;
       } catch (error) {
         document.getElementById("lista-cotacoes").innerText = "Erro ao carregar cotações.";
@@ -101,7 +91,7 @@
     }
 
     carregarCotacoes();
-    setInterval(carregarCotacoes, 60000); // Atualiza a cada 1 minuto
+    setInterval(carregarCotacoes, 60000);
   </script>
 
 </body>
