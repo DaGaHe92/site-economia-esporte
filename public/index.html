@@ -1,102 +1,210 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portal de Economia</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding-top: 60px;
-      background-color: #f0f2f5;
-      text-align: center;
-    }
-
-    /* MENU FIXO */
-    .menu-fixo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: #1976d2;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      flex-wrap: wrap; /* Permite quebra de linha no menu */
-    }
-
-    .menu-fixo a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: 0.3s;
-      white-space: nowrap; /* Evita quebra dentro do link */
-    }
-
-    .menu-fixo a:hover {
-      background-color: #0d47a1;
-    }
-
-    /* CONTEÚDO PRINCIPAL */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Economia & Mercado - Notícias e Cotações Atualizadas</title>
+<style>
+  /* Reset básico */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    padding: 15px;
+  }
+  header {
+    background-color: #004a99;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+  nav {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  nav a {
+    color: #004a99;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  nav a:hover {
+    background-color: #004a99;
+    color: white;
+  }
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  section {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 7px rgb(0 0 0 / 0.1);
+    height: 450px;
+    overflow-y: auto;
+  }
+  h2 {
+    margin-bottom: 15px;
+    color: #004a99;
+    border-bottom: 2px solid #004a99;
+    padding-bottom: 8px;
+  }
+  /* Notícias */
+  .noticia-item {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+  }
+  .noticia-item a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+  .noticia-item a:hover {
+    text-decoration: underline;
+  }
+  /* Cotações */
+  .cotacao-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .valor-positivo {
+    color: green;
+  }
+  .valor-negativo {
+    color: red;
+  }
+  /* Criptomoedas */
+  .cripto-item {
+    margin-bottom: 12px;
+  }
+  /* Mobile */
+  @media(max-width: 900px) {
     main {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      text-align: left;
+      grid-template-columns: 1fr;
+      height: auto;
     }
-
-    /* RODAPÉ */
-    footer {
-      margin-top: 20px;
-      padding: 10px;
-      background: #1976d2;
-      color: white;
-      text-align: center;
+    section {
+      height: auto;
     }
-
-    /* MELHORIAS MOBILE */
-    @media (max-width: 600px) {
-      .menu-fixo {
-        justify-content: center;
-        gap: 8px;
-        padding: 8px;
-      }
-      .menu-fixo a {
-        font-size: 14px;
-        padding: 6px 10px;
-      }
-      main {
-        padding: 10px;
-        margin: 5px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <nav class="menu-fixo">
-    <a href="/index.html">🏠 Início</a>
-    <a href="/noticias.html">📰 Notícias</a>
-    <a href="/atualidades.html">📊 Atualidades</a>
-    <a href="/criptomoedas.html">💰 Criptomoedas</a>
-    <a href="/dicas.html">💡 Dicas</a>
-  </nav>
+<header>Economia & Mercado Atualizado</header>
+<nav>
+  <a href="#noticias">Notícias</a>
+  <a href="#cotacoes">Cotações</a>
+  <a href="#criptomoedas">Criptomoedas</a>
+</nav>
+<main>
+  <section id="noticias">
+    <h2>Últimas Notícias de Economia</h2>
+    <div id="lista-noticias">Carregando notícias...</div>
+  </section>
+  <section id="cotacoes">
+    <h2>Cotações Principais</h2>
+    <div id="lista-cotacoes">Carregando cotações...</div>
+  </section>
+  <section id="criptomoedas">
+    <h2>Criptomoedas</h2>
+    <div id="lista-criptos">Carregando criptomoedas...</div>
+  </section>
+</main>
 
-  <main>
-    <h1>🌎 Portal de Economia</h1>
-    <p>Últimas notícias, cotações e dicas de investimentos em um só lugar</p>
-  </main>
+<script>
+// Função para carregar notícias - NewsAPI
+async function carregarNoticias() {
+  const chaveAPI = "SUA_CHAVE_NEWSAPI_AQUI"; // Troque pela sua chave
+  const url = `https://newsapi.org/v2/everything?q=economia&language=pt&sortBy=publishedAt&pageSize=7&apiKey=${chaveAPI}`;
 
-  <footer>
-    © 2025 Daniel Rodrigues - Todos os direitos reservados
-  </footer>
+  try {
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+    if(dados.status !== "ok") throw new Error("Erro ao carregar notícias");
+    const container = document.getElementById("lista-noticias");
+    container.innerHTML = "";
+    dados.articles.forEach(noticia => {
+      const item = document.createElement("div");
+      item.classList.add("noticia-item");
+      item.innerHTML = `<a href="${noticia.url}" target="_blank" rel="noopener">${noticia.title}</a><br><small>${new Date(noticia.publishedAt).toLocaleDateString()}</small>`;
+      container.appendChild(item);
+    });
+  } catch(e) {
+    document.getElementById("lista-noticias").innerText = "Erro ao carregar notícias.";
+  }
+}
+
+// Função para carregar cotações - Alpha Vantage
+async function carregarCotacoes() {
+  const chaveAPI = "SUA_CHAVE_ALPHA_VANTAGE"; // Troque pela sua chave
+  const simbolos = {
+    "Dólar (USD/BRL)": "USDBRL",
+    "Euro (EUR/BRL)": "EURBRL",
+    "Ibovespa": "^BVSP"
+  };
+  const container = document.getElementById("lista-cotacoes");
+  container.innerHTML = "";
+
+  for(const nome in simbolos) {
+    try {
+      // Alpha Vantage não retorna índices como Ibovespa direto via API free, para simplificar só dólar e euro aqui
+      if(nome === "Ibovespa") {
+        container.innerHTML += `<div class="cotacao-item">${nome}: <span>Não disponível na versão free</span></div>`;
+        continue;
+      }
+
+      const url = `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${simbolos[nome].slice(0,3)}&to_currency=${simbolos[nome].slice(3,6)}&apikey=${chaveAPI}`;
+      const resposta = await fetch(url);
+      const dados = await resposta.json();
+      const valor = dados["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+      container.innerHTML += `<div class="cotacao-item">${nome}: <span>${parseFloat(valor).toFixed(4)}</span></div>`;
+    } catch {
+      container.innerHTML += `<div class="cotacao-item">${nome}: <span>Erro ao carregar</span></div>`;
+    }
+  }
+}
+
+// Função para carregar criptomoedas - CoinGecko
+async function carregarCriptomoedas() {
+  const container = document.getElementById("lista-criptos");
+  container.innerHTML = "";
+  try {
+    const resposta = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=5&page=1&sparkline=false");
+    const dados = await resposta.json();
+    dados.forEach(cripto => {
+      const valor = cripto.price_change_percentage_24h >= 0 ? 
+                    `<span style="color:green;">+${cripto.price_change_percentage_24h.toFixed(2)}%</span>` : 
+                    `<span style="color:red;">${cripto.price_change_percentage_24h.toFixed(2)}%</span>`;
+      const item = document.createElement("div");
+      item.classList.add("cripto-item");
+      item.innerHTML = `
+        <strong>${cripto.name} (${cripto.symbol.toUpperCase()})</strong><br>
+        Preço: R$ ${cripto.current_price.toFixed(2)}<br>
+        Variação 24h: ${valor}
+      `;
+      container.appendChild(item);
+    });
+  } catch {
+    container.innerText = "Erro ao carregar criptomoedas.";
+  }
+}
+
+// Chama todas as funções para carregar o conteúdo
+carregarNoticias();
+carregarCotacoes();
+carregarCriptomoedas();
+</script>
 </body>
 </html>
