@@ -73,25 +73,31 @@
   <script>
     async function carregarCotacoes() {
       try {
-        const resposta = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,PETR4.SA,VALE3.SA,ITUB4.SA,IBOV");
-        const dados = await resposta.json();
+        // Cotações de moedas
+        const moedas = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL
+308 Permanent Redirect
+{"USDBRL":{"code":"USD","codein":"BRL","name":"Dólar Americano/Real Brasileiro","high":"5.6047","low":"5.5494","varBid":"0.04153","pctChange":"0.747481","bid":"5. ...
+economia.awesomeapi.com.br
+");
+        const dadosMoedas = await moedas.json();
+
+        // Simulação de Ibovespa (substituir por API oficial se disponível)
+        const ibov = (Math.random() * (130000 - 120000) + 120000).toFixed(2);
+
         const container = document.getElementById("lista-cotacoes");
         container.innerHTML = "";
 
         const itens = [
-          {nome: "Dólar", valor: dados.USDBRL?.bid},
-          {nome: "Euro", valor: dados.EURBRL?.bid},
-          {nome: "Petrobras (PETR4)", valor: dados["PETR4.SA"]?.bid},
-          {nome: "Vale (VALE3)", valor: dados["VALE3.SA"]?.bid},
-          {nome: "Itaú (ITUB4)", valor: dados["ITUB4.SA"]?.bid},
-          {nome: "Ibovespa (IBOV)", valor: dados.IBOV?.bid}
+          {nome: "Dólar", valor: dadosMoedas.USDBRL?.bid},
+          {nome: "Euro", valor: dadosMoedas.EURBRL?.bid},
+          {nome: "Ibovespa (simulado)", valor: ibov}
         ];
 
         itens.forEach(item => {
           if (item.valor) {
             const div = document.createElement("div");
             div.classList.add("cotacao");
-            div.innerHTML = `<span>${item.nome}:</span> R$ ${parseFloat(item.valor).toFixed(2)}`;
+            div.innerHTML = `<span>${item.nome}:</span> R$ ${parseFloat(item.valor).toLocaleString('pt-BR')}`;
             container.appendChild(div);
           }
         });
@@ -101,7 +107,7 @@
     }
 
     carregarCotacoes();
-    setInterval(carregarCotacoes, 60000); // atualiza a cada 60 segundos
+    setInterval(carregarCotacoes, 60000);
   </script>
 
 </body>
