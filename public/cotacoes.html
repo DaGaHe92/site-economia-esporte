@@ -5,117 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cotações do Mercado</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding-top: 60px;
-      background-color: #f0f2f5;
-      text-align: center;
-    }
-    .menu-fixo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: #1976d2;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    .menu-fixo a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    .menu-fixo a:hover {
-      background-color: #0d47a1;
-    }
-    .cotacao {
-      background: white;
-      padding: 15px;
-      margin: 10px auto;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      text-align: left;
-      font-size: 16px;
-    }
-    .cotacao span {
-      font-weight: bold;
-      color: #333;
-    }
-    h2 {
-      margin-top: 20px;
-      color: #1976d2;
-    }
+    body { font-family: Arial, sans-serif; margin:0; padding-top:60px;
+           background-color:#f0f2f5; text-align:center; }
+    .menu-fixo { position:fixed; top:0; left:0; right:0; background:#1976d2;
+      padding:10px; display:flex; justify-content:center; gap:15px;
+      z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,0.2); }
+    .menu-fixo a { color:white; text-decoration:none; font-weight:bold;
+      padding:8px 12px; border-radius:5px; transition:0.3s; }
+    .menu-fixo a:hover { background:#0d47a1; }
+    .cotacao { background:white; padding:15px; margin:10px auto;
+      width:90%; max-width:400px; border-radius:8px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.2); text-align:left; font-size:16px; }
+    .alta { color: green; }
+    .queda { color: red; }
+    h2 { margin-top:20px; color:#1976d2; }
   </style>
 </head>
 <body>
 
-  <nav class="menu-fixo">
-    <a href="index.html">🏠 Início</a>
-    <a href="noticias.html">📰 Notícias</a>
-    <a href="atualidades.html">🌐 Atualidades</a>
-    <a href="criptomoedas.html">💰 Criptomoedas</a>
-    <a href="dicas.html">💡 Dicas</a>
-    <a href="cotacoes.html">💹 Cotações</a>
-  </nav>
+<nav class="menu-fixo">
+  <a href="index.html">🏠 Início</a>
+  <a href="noticias.html">📰 Notícias</a>
+  <a href="atualidades.html">🌐 Atualidades</a>
+  <a href="criptomoedas.html">💰 Criptomoedas</a>
+  <a href="dicas.html">💡 Dicas</a>
+  <a href="cotacoes.html">💹 Cotações</a>
+</nav>
 
-  <h1>💹 Cotações em Tempo Real</h1>
+<h1>💹 Cotações em Tempo Real</h1>
 
-  <h2>💵 Moedas</h2>
-  <div id="lista-moedas">
-    <p>Carregando dados...</p>
-  </div>
+<h2>💵 Moedas</h2>
+<div id="lista-moedas"><p>Carregando dados...</p></div>
 
-  <h2>📊 Ações da B3</h2>
-  <div id="lista-acoes">
-    <p>Carregando dados...</p>
-  </div>
+<h2>📊 Ações da B3</h2>
+<div id="lista-acoes"><p>Carregando dados...</p></div>
 
-  <script>
-    async function carregarCotacoes() {
-      try {
-        // Cotação de moedas
-        const moedasResp = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-USD");
-        const moedas = await moedasResp.json();
+<script>
+async function carregarCotacoes() {
+  try {
+    const m = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-USD");
+    const mo = await m.json();
+    const moedasHTML = `
+      <div class="cotacao"><span>Dólar (USD):</span> R$ ${parseFloat(mo.USDBRL.bid).toFixed(2)}</div>
+      <div class="cotacao"><span>Euro (EUR):</span> R$ ${parseFloat(mo.EURBRL.bid).toFixed(2)}</div>
+      <div class="cotacao"><span>Bitcoin (BTC):</span> US$ ${parseFloat(mo.BTCUSD.bid).toFixed(2)}</div>`;
+    document.getElementById("lista-moedas").innerHTML = moedasHTML;
 
-        // Ações brasileiras (utilizando API que funciona para PETR4, VALE3, ITUB4)
-        const acoesResp = await fetch("https://brapi.dev/api/quote/PETR4,VALE3,ITUB4");
-        const acoes = await acoesResp.json();
+    const a = await fetch("https://brapi.dev/api/quote/PETR4,VALE3,ITUB4");
+    const ao = await a.json();
+    let aHTML = "";
+    ao.results.forEach(r => {
+      const cor = r.change > 0 ? "alta" : (r.change < 0 ? "queda" : "");
+      aHTML += `<div class="cotacao"><span>${r.symbol}:</span> R$ ${parseFloat(r.regularMarketPrice).toFixed(2)}
+        <span class="${cor}"> (${r.change.toFixed(2)}%)</span></div>`;
+    });
+    document.getElementById("lista-acoes").innerHTML = aHTML;
 
-        // Exibir moedas
-        const moedasHTML = `
-          <div class="cotacao"><span>Dólar (USD):</span> R$ ${parseFloat(moedas.USDBRL.bid).toFixed(2)}</div>
-          <div class="cotacao"><span>Euro (EUR):</span> R$ ${parseFloat(moedas.EURBRL.bid).toFixed(2)}</div>
-          <div class="cotacao"><span>Bitcoin (BTC):</span> US$ ${parseFloat(moedas.BTCUSD.bid).toFixed(2)}</div>
-        `;
-
-        // Exibir ações (dados vindos da API BRAPI)
-        let acoesHTML = "";
-        acoes.results.forEach(acao => {
-          acoesHTML += `<div class="cotacao"><span>${acao.symbol}:</span> R$ ${parseFloat(acao.regularMarketPrice).toFixed(2)}</div>`;
-        });
-
-        document.getElementById("lista-moedas").innerHTML = moedasHTML;
-        document.getElementById("lista-acoes").innerHTML = acoesHTML;
-
-      } catch (error) {
-        document.getElementById("lista-moedas").innerText = "Erro ao carregar moedas.";
-        document.getElementById("lista-acoes").innerText = "Erro ao carregar ações.";
-      }
-    }
-
-    carregarCotacoes();
-    setInterval(carregarCotacoes, 60000); // Atualiza a cada 1 minuto
-  </script>
+  } catch {
+    document.getElementById("lista-moedas").innerText = "Erro ao carregar moedas.";
+    document.getElementById("lista-acoes").innerText = "Erro ao carregar ações.";
+  }
+}
+carregarCotacoes();
+setInterval(carregarCotacoes, 60000);
+</script>
 
 </body>
 </html>
