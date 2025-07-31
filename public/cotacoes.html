@@ -7,65 +7,102 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding-top: 60px;
       background-color: #f0f2f5;
-      padding: 20px;
       text-align: center;
     }
-    h1 {
-      color: #1a237e;
+    .menu-fixo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #1976d2;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    .box {
-      background-color: white;
-      border-radius: 8px;
+    .menu-fixo a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .menu-fixo a:hover {
+      background-color: #0d47a1;
+    }
+    .cotacao {
+      background: white;
       padding: 15px;
-      margin: 15px auto;
-      width: 300px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 10px auto;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      text-align: left;
+      font-size: 16px;
     }
-    .loading {
-      color: #888;
+    .cotacao span {
+      font-weight: bold;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <h1>💹 Cotações do Mercado</h1>
 
-  <div class="box" id="dolar">Carregando dólar...</div>
-  <div class="box" id="euro">Carregando euro...</div>
-  <div class="box" id="acoes">Carregando ações...</div>
+  <!-- MENU FIXO -->
+  <nav class="menu-fixo">
+    <a href="index.html">🏠 Início</a>
+    <a href="noticias.html">📰 Notícias</a>
+    <a href="atualidades.html">🌐 Atualidades</a>
+    <a href="criptomoedas.html">💰 Criptomoedas</a>
+    <a href="dicas.html">💡 Dicas</a>
+    <a href="cotacoes.html">💹 Cotações</a>
+  </nav>
+
+  <h1>💹 Cotações em Tempo Real</h1>
+  <div id="lista-cotacoes">
+    <p>Carregando dados...</p>
+  </div>
 
   <script>
     async function carregarCotacoes() {
       try {
-        // Cotação do dólar
-        let dolarResp = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
-        let dolarData = await dolarResp.json();
-        document.getElementById("dolar").innerText =
-          "💵 Dólar: R$ " + (1 / dolarData.rates.BRL).toFixed(2);
+        const resposta = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,PETR4.SA,VALE3.SA,ITUB4.SA,IBOV");
+        const dados = await resposta.json();
+        const container = document.getElementById("lista-cotacoes");
+        container.innerHTML = "";
 
-        // Cotação do euro
-        let euroResp = await fetch("https://api.exchangerate-api.com/v4/latest/EUR");
-        let euroData = await euroResp.json();
-        document.getElementById("euro").innerText =
-          "💶 Euro: R$ " + (1 / euroData.rates.BRL).toFixed(2);
+        const itens = [
+          {nome: "Dólar", valor: dados.USDBRL?.bid},
+          {nome: "Euro", valor: dados.EURBRL?.bid},
+          {nome: "Petrobras (PETR4)", valor: dados["PETR4.SA"]?.bid},
+          {nome: "Vale (VALE3)", valor: dados["VALE3.SA"]?.bid},
+          {nome: "Itaú (ITUB4)", valor: dados["ITUB4.SA"]?.bid},
+          {nome: "Ibovespa (IBOV)", valor: dados.IBOV?.bid}
+        ];
 
-        // Ações da B3
-        let acoesResp = await fetch("https://brapi.dev/api/quote/PETR4,VALE3,ITUB4?range=1d&interval=1d");
-        let acoesData = await acoesResp.json();
-
-        let acoesHTML = "📈 Principais ações:<br>";
-        acoesData.results.forEach(acao => {
-          acoesHTML += `${acao.symbol}: R$ ${acao.regularMarketPrice}<br>`;
+        itens.forEach(item => {
+          if (item.valor) {
+            const div = document.createElement("div");
+            div.classList.add("cotacao");
+            div.innerHTML = `<span>${item.nome}:</span> R$ ${parseFloat(item.valor).toFixed(2)}`;
+            container.appendChild(div);
+          }
         });
-
-        document.getElementById("acoes").innerHTML = acoesHTML;
-
       } catch (error) {
-        document.getElementById("acoes").innerText = "Erro ao carregar cotações.";
+        document.getElementById("lista-cotacoes").innerText = "Erro ao carregar cotações.";
       }
     }
 
     carregarCotacoes();
+    setInterval(carregarCotacoes, 60000); // atualiza a cada 60 segundos
   </script>
+
 </body>
 </html>
