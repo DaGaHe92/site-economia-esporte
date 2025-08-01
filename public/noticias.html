@@ -14,12 +14,13 @@
     }
     h1 {
       color: #333;
+      margin-bottom: 15px;
     }
     .noticia {
       background: #fff;
       margin: 10px auto;
       padding: 10px;
-      width: 90%;
+      width: 95%;
       max-width: 500px;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -30,6 +31,11 @@
       color: #1976d2;
       font-weight: bold;
     }
+    .erro {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -39,7 +45,6 @@
   <script>
     async function carregarNoticias() {
       try {
-        // Usando proxy para evitar bloqueio da Vercel
         const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://g1.globo.com/rss/g1/economia/");
         const resposta = await fetch(url);
         const dados = await resposta.json();
@@ -56,12 +61,14 @@
           }
         });
 
-        document.getElementById("listaNoticias").innerHTML = html;
+        document.getElementById("listaNoticias").innerHTML = html || "<p class='erro'>Nenhuma notícia encontrada.</p>";
       } catch (e) {
-        document.getElementById("listaNoticias").innerHTML = "Erro ao carregar notícias.";
+        document.getElementById("listaNoticias").innerHTML = `
+          <p class='erro'>Erro ao carregar notícias automáticas.</p>
+          <div class='noticia'><a href='https://g1.globo.com/economia/' target='_blank'>Clique aqui para ver as últimas notícias no G1</a></div>
+        `;
       }
     }
-
     carregarNoticias();
   </script>
 </body>
