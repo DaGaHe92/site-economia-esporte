@@ -2,16 +2,106 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dicas de Finanças</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dicas de Investimentos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding-top: 70px;
+      text-align: center;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #1976d2;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 15px;
+      z-index: 1000;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: #0d47a1;
+    }
+
+    .container {
+      background: white;
+      margin: 10px auto;
+      padding: 15px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    h2 {
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+
+    .dica {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 5px solid #1976d2;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Dicas Rápidas para Economizar Dinheiro</h1>
-  <ul>
-    <li>Faça uma lista antes de ir ao mercado.</li>
-    <li>Invista um pouco todo mês, mesmo valores pequenos.</li>
-    <li>Evite compras por impulso.</li>
-  </ul>
-  <a href="index.html">← Voltar para o início</a>
+  <div class="menu">
+    <a href="index.html">🏠 Início</a>
+    <a href="noticias.html">📰 Notícias</a>
+    <a href="cotacoes.html">💹 Cotações</a>
+    <a href="criptomoedas.html">💰 Criptomoedas</a>
+    <a href="dicas.html">📌 Dicas</a>
+    <a href="atualidades.html">🌍 Atualidades</a>
+  </div>
+
+  <h1>📌 Dicas de Investimentos</h1>
+
+  <div id="listaDicas"></div>
+
+  <script>
+    const dicas = [
+      "Invista parte do seu dinheiro em Tesouro Selic para reserva de emergência.",
+      "Diversifique seus investimentos para reduzir riscos.",
+      "Não coloque todo o capital em ações de uma única empresa.",
+      "O CDI é um bom indicador para investimentos de renda fixa.",
+      "Tesouro IPCA protege seu dinheiro contra a inflação.",
+      "Debêntures podem oferecer rendimentos acima da média, mas têm risco maior.",
+      "Sempre tenha uma parte do capital em liquidez para oportunidades."
+    ];
+
+    function carregarDicas() {
+      const container = document.getElementById("listaDicas");
+      container.innerHTML = "";
+
+      dicas.forEach(dica => {
+        const item = document.createElement("div");
+        item.classList.add("container", "dica");
+        item.innerText = dica;
+        container.appendChild(item);
+      });
+    }
+
+    carregarDicas();
+  </script>
 </body>
 </html>
