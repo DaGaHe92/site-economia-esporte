@@ -3,78 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cotações do Mercado</title>
+  <title>Cotações em Tempo Real</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding-top:60px;
-           background:#f0f2f5; text-align:center; }
-    .menu-fixo { position:fixed; top:0; left:0; right:0; background:#1976d2;
-      padding:10px; display:flex; justify-content:center; gap:15px;
-      z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,0.2); }
-    .menu-fixo a { color:white; text-decoration:none; font-weight:bold;
-      padding:8px 12px; border-radius:5px; transition:0.3s; }
-    .menu-fixo a:hover { background:#0d47a1; }
-    .cotacao { background:white; padding:15px; margin:10px auto;
-      width:90%; max-width:400px; border-radius:8px;
-      box-shadow:0 2px 5px rgba(0,0,0,0.2); text-align:left; font-size:16px; }
-    .alta { color:green; }
-    .queda { color:red; }
-    h2 { margin-top:20px; color:#1976d2; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding-top: 70px;
+      text-align: center;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #1976d2;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 15px;
+      z-index: 1000;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: #0d47a1;
+    }
+
+    .container {
+      background: white;
+      margin: 10px auto;
+      padding: 15px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    .up {
+      color: green;
+      font-weight: bold;
+    }
+
+    .down {
+      color: red;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
+  <div class="menu">
+    <a href="index.html">🏠 Início</a>
+    <a href="noticias.html">📰 Notícias</a>
+    <a href="cotacoes.html">💹 Cotações</a>
+    <a href="criptomoedas.html">💰 Criptomoedas</a>
+    <a href="dicas.html">📌 Dicas</a>
+    <a href="atualidades.html">🌍 Atualidades</a>
+  </div>
 
-<nav class="menu-fixo">
-  <a href="index.html">🏠 Início</a>
-  <a href="noticias.html">📰 Notícias</a>
-  <a href="atualidades.html">🌐 Atualidades</a>
-  <a href="criptomoedas.html">💰 Criptomoedas</a>
-  <a href="dicas.html">💡 Dicas</a>
-  <a href="cotacoes.html">💹 Cotações</a>
-</nav>
+  <h1>💹 Cotações de Hoje</h1>
 
-<h1>💹 Cotações em Tempo Real</h1>
+  <div class="container">
+    <div id="dolar" class="item">Carregando dólar...</div>
+    <div id="euro" class="item">Carregando euro...</div>
+    <div id="ibovespa" class="item">Carregando Ibovespa...</div>
+  </div>
 
-<h2>💵 Moedas</h2>
-<div id="lista-moedas"><p>Carregando...</p></div>
+  <script>
+    async function carregarCotacoes() {
+      try {
+        const resposta = await fetch("https://api.hgbrasil.com/finance?format=json-cors&key=5e5cfe0d");
+        const dados = await resposta.json();
+        const moedas = dados.results.currencies;
+        const bolsa = dados.results.stocks;
 
-<h2>📊 Ações (PETR4, VALE3, ITUB4)</h2>
-<div id="lista-acoes"><p>Carregando...</p></div>
+        document.getElementById("dolar").innerHTML = `💵 Dólar: R$ ${moedas.USD.buy.toFixed(2)} <span class="${moedas.USD.variation >= 0 ? 'up' : 'down'}">${moedas.USD.variation}%</span>`;
+        document.getElementById("euro").innerHTML = `💶 Euro: R$ ${moedas.EUR.buy.toFixed(2)} <span class="${moedas.EUR.variation >= 0 ? 'up' : 'down'}">${moedas.EUR.variation}%</span>`;
+        document.getElementById("ibovespa").innerHTML = `📈 Ibovespa: ${bolsa.IBOVESPA.points.toFixed(2)} pts <span class="${bolsa.IBOVESPA.variation >= 0 ? 'up' : 'down'}">${bolsa.IBOVESPA.variation}%</span>`;
+      } catch (error) {
+        document.getElementById("dolar").innerText = "Erro ao carregar dólar.";
+        document.getElementById("euro").innerText = "Erro ao carregar euro.";
+        document.getElementById("ibovespa").innerText = "Erro ao carregar Ibovespa.";
+      }
+    }
 
-<script>
-async function carregarCotacoes() {
-  try {
-    // Cotação moedas
-    const moedasResp = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-USD");
-    const moedas = await moedasResp.json();
-    document.getElementById("lista-moedas").innerHTML = `
-      <div class="cotacao"><span>Dólar (USD):</span> R$ ${parseFloat(moedas.USDBRL.bid).toFixed(2)}</div>
-      <div class="cotacao"><span>Euro (EUR):</span> R$ ${parseFloat(moedas.EURBRL.bid).toFixed(2)}</div>
-      <div class="cotacao"><span>Bitcoin (BTC):</span> US$ ${parseFloat(moedas.BTCUSD.bid).toFixed(2)}</div>
-    `;
-
-    // Ações usando API alternativa com dados mockados para evitar bloqueio
-    const acoes = [
-      { symbol: "PETR4", price: 38.50, change: +0.85 },
-      { symbol: "VALE3", price: 65.20, change: -0.40 },
-      { symbol: "ITUB4", price: 29.70, change: +0.15 }
-    ];
-
-    let html = "";
-    acoes.forEach(a => {
-      const cor = a.change >= 0 ? "alta" : "queda";
-      html += `<div class="cotacao"><span>${a.symbol}:</span> R$ ${a.price.toFixed(2)}
-        <span class="${cor}"> (${a.change.toFixed(2)}%)</span></div>`;
-    });
-    document.getElementById("lista-acoes").innerHTML = html;
-
-  } catch(e) {
-    document.getElementById("lista-moedas").innerText = "Erro ao carregar moedas.";
-    document.getElementById("lista-acoes").innerText = "Erro ao carregar ações.";
-  }
-}
-carregarCotacoes();
-setInterval(carregarCotacoes, 60000);
-</script>
-
+    carregarCotacoes();
+  </script>
 </body>
 </html>
