@@ -1,129 +1,55 @@
-/* ================================
-   ESTILO GLOBAL - InfoEconomia 24h
-   ================================ */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-    color: #222;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre - InfoEconomia 24h</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Menu de Navegação -->
+  <header class="menu-fixo">
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="noticias.html">📰 Notícias</a>
+      <a href="atualidades.html">🌐 Atualidades</a>
+      <a href="cotações.html">💹 Cotações</a>
+      <a href="criptomoedas.html">💰 Criptomoedas</a>
+      <a href="financas-pessoais.html">📌 Finanças Pessoais</a>
+      <a href="dicas.html">💡 Dicas</a>
+      <a href="investimentos.html">📈 Investimentos</a>
+      <a href="politica.html">🏛 Política</a>
+      <a href="esportes.html">🏆 Esportes</a>
+      <a href="comparativos.html">⚖️ Comparativos</a>
+      <a href="consorcio.html">📜 Consórcio</a>
+      <a href="sobre.html" class="ativo">ℹ️ Sobre</a>
+      <a href="contato.html">📞 Contato</a>
+    </nav>
+  </header>
 
-/* ======= CABEÇALHO ======= */
-header {
-    background-color: #2f4f4f; /* Verde militar */
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-    font-size: 1.8em;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
+  <main class="conteudo">
+    <h1>ℹ️ Sobre o InfoEconomia 24h</h1>
+    <p>O <strong>InfoEconomia 24h</strong> é um portal de informações atualizado em tempo real, trazendo notícias e análises sobre economia, política, investimentos, cotações, criptomoedas e o mercado financeiro em geral.</p>
 
-header span {
-    color: #ffcc00; /* Amarelo ouro */
-}
+    <p>Nosso objetivo é fornecer conteúdo confiável, rápido e acessível para ajudar você a tomar melhores decisões financeiras, seja no dia a dia ou em investimentos de longo prazo.</p>
 
-/* ======= MENU DE NAVEGAÇÃO ======= */
-nav {
-    background-color: #36454F;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px;
-    position: sticky;
-    top: 65px;
-    z-index: 999;
-}
+    <h2>🔹 Nossa Missão</h2>
+    <p>Oferecer informação econômica de qualidade, acessível a todos, com atualizações automáticas 24 horas por dia.</p>
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 14px;
-    margin: 3px;
-    border-radius: 5px;
-    transition: 0.3s;
-    font-weight: bold;
-    font-size: 0.95em;
-}
+    <h2>🔹 Nossa Visão</h2>
+    <p>Ser um dos maiores portais de notícias financeiras do Brasil, ajudando milhares de pessoas a entender o mercado e prosperar financeiramente.</p>
 
-nav a:hover {
-    background-color: #ffcc00;
-    color: #222;
-}
+    <h2>🔹 Nossos Valores</h2>
+    <ul>
+      <li>✅ Transparência e confiabilidade;</li>
+      <li>✅ Velocidade e praticidade na entrega de informações;</li>
+      <li>✅ Conteúdo imparcial e baseado em dados reais;</li>
+      <li>✅ Automação e tecnologia a serviço da informação.</li>
+    </ul>
+  </main>
 
-/* ======= CONTEÚDO PRINCIPAL ======= */
-main {
-    padding: 20px;
-    max-width: 1000px;
-    margin: 20px auto;
-}
-
-section {
-    background: #fff;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-/* ======= LINKS DE NOTÍCIAS ======= */
-a.noticia-link {
-    display: block;
-    background: #e8f5e9;
-    border-left: 4px solid #2f4f4f;
-    padding: 10px;
-    margin: 8px 0;
-    text-decoration: none;
-    color: #222;
-    border-radius: 4px;
-    transition: 0.3s;
-}
-a.noticia-link:hover {
-    background: #ffcc00;
-    color: #000;
-}
-
-/* ======= RODAPÉ ======= */
-footer {
-    background-color: #2f4f4f;
-    color: #fff;
-    text-align: center;
-    padding: 12px;
-    margin-top: 20px;
-    font-size: 0.9em;
-}
-
-/* ======= BOTÕES E ALERTAS ======= */
-button {
-    background-color: #2f4f4f;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-button:hover {
-    background-color: #ffcc00;
-    color: #000;
-}
-
-/* ======= RESPONSIVIDADE ======= */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    nav a {
-        width: 90%;
-        text-align: center;
-        margin: 5px 0;
-    }
-    main {
-        padding: 10px;
-    }
-}
+  <footer>
+    <p>© 2025 InfoEconomia 24h - Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
