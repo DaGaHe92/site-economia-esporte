@@ -3,87 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notícias de Esportes</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background-color: #1e88e5;
-      color: #fff;
-      padding: 15px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .conteudo {
-      padding: 20px;
-    }
-    .noticia {
-      background: #fff;
-      padding: 15px;
-      margin: 10px auto;
-      max-width: 600px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .noticia a {
-      text-decoration: none;
-      color: #1e88e5;
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-    .noticia p {
-      margin: 0;
-      color: #555;
-      font-size: 14px;
-    }
-  </style>
+  <title>Esportes - InfoEconomia 24h</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>🏆 Notícias de Esportes</header>
-  <div class="conteudo" id="listaEsportes">Carregando notícias de esportes...</div>
+  <!-- Menu de Navegação -->
+  <header class="menu-fixo">
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="noticias.html">📰 Notícias</a>
+      <a href="atualidades.html">🌐 Atualidades</a>
+      <a href="cotações.html">💹 Cotações</a>
+      <a href="criptomoedas.html">💰 Criptomoedas</a>
+      <a href="financas-pessoais.html">📌 Finanças Pessoais</a>
+      <a href="dicas.html">💡 Dicas</a>
+      <a href="investimentos.html">📈 Investimentos</a>
+      <a href="politica.html">🏛 Política</a>
+      <a href="esportes.html" class="ativo">🏆 Esportes</a>
+      <a href="contato.html">📞 Contato</a>
+    </nav>
+  </header>
 
-  <script>
-    async function carregarEsportes() {
-      try {
-        // Proxy para evitar bloqueio de CORS
-        const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://www.espn.com.br/rss/");
-        const resposta = await fetch(url);
-        const dados = await resposta.json();
+  <main class="conteudo">
+    <h1>🏆 Esportes e Economia</h1>
 
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(dados.contents, "text/xml");
-        const itens = xml.querySelectorAll("item");
-        let html = "";
+    <div class="card">
+      <h2>📌 Impacto do Futebol na Economia</h2>
+      <p>Os grandes campeonatos movimentam bilhões em patrocínios, turismo e comércio, impulsionando a economia.</p>
+    </div>
 
-        itens.forEach((item, index) => {
-          if (index < 8) { // mostra as 8 principais notícias
-            let titulo = item.querySelector("title").textContent;
-            let link = item.querySelector("link").textContent;
-            let descricao = item.querySelector("description")?.textContent || "Clique para ler a matéria completa.";
-            html += `
-              <div class="noticia">
-                <a href="${link}" target="_blank">${titulo}</a>
-                <p>${descricao}</p>
-              </div>
-            `;
-          }
-        });
+    <div class="card">
+      <h2>📌 Economia dos Esportes Olímpicos</h2>
+      <p>Os Jogos Olímpicos geram investimentos em infraestrutura, transporte e serviços para milhões de turistas.</p>
+    </div>
 
-        document.getElementById("listaEsportes").innerHTML = html;
-      } catch (e) {
-        document.getElementById("listaEsportes").innerHTML = "⚠️ Erro ao carregar notícias de esportes.";
-      }
-    }
+    <div class="card">
+      <h2>📌 Salários e Transferências de Jogadores</h2>
+      <p>O mercado de transferências de atletas movimenta cifras bilionárias anualmente no futebol e em outros esportes.</p>
+    </div>
 
-    carregarEsportes();
-  </script>
+    <div class="card">
+      <h2>📌 Apostas Esportivas e Mercado Financeiro</h2>
+      <p>O setor de apostas cresce mundialmente, impactando diretamente a economia e o marketing esportivo.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2025 InfoEconomia 24h - Esportes e Economia</p>
+  </footer>
 </body>
 </html>
-
