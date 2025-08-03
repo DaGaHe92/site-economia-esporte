@@ -3,92 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dicas Financeiras</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background-color: #33691e;
-      color: #fff;
-      padding: 15px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .conteudo {
-      padding: 20px;
-    }
-    .dica {
-      background: #fff;
-      padding: 15px;
-      margin: 10px auto;
-      max-width: 600px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .dica h3 {
-      color: #33691e;
-      margin-bottom: 5px;
-    }
-    .dica p {
-      margin: 0;
-      color: #555;
-      line-height: 1.4;
-    }
-  </style>
+  <title>Dicas Financeiras - InfoEconomia 24h</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>💡 Dicas Financeiras</header>
-  <div class="conteudo" id="listaDicas">Carregando dicas...</div>
+  <!-- Menu de Navegação -->
+  <header class="menu-fixo">
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="noticias.html">📰 Notícias</a>
+      <a href="atualidades.html">🌐 Atualidades</a>
+      <a href="cotações.html">💹 Cotações</a>
+      <a href="criptomoedas.html">💰 Criptomoedas</a>
+      <a href="financas-pessoais.html">📌 Finanças Pessoais</a>
+      <a href="dicas.html" class="ativo">💡 Dicas</a>
+      <a href="investimentos.html">📈 Investimentos</a>
+      <a href="politica.html">🏛 Política</a>
+      <a href="esportes.html">🏆 Esportes</a>
+      <a href="contato.html">📞 Contato</a>
+    </nav>
+  </header>
 
-  <script>
-    // Dicas pré-carregadas para exibir automaticamente
-    const dicas = [
-      {
-        titulo: "Monte uma reserva de emergência",
-        texto: "Guarde ao menos 6 meses dos seus gastos fixos em uma aplicação de baixo risco e liquidez diária."
-      },
-      {
-        titulo: "Evite dívidas de juros altos",
-        texto: "Cartão de crédito e cheque especial possuem juros altíssimos. Use apenas em situações emergenciais."
-      },
-      {
-        titulo: "Invista um pouco todo mês",
-        texto: "Mesmo valores pequenos, aplicados com disciplina, geram grande patrimônio no longo prazo."
-      },
-      {
-        titulo: "Compare tarifas bancárias",
-        texto: "Pesquise bancos digitais que oferecem contas sem tarifas para economizar dinheiro."
-      },
-      {
-        titulo: "Não financie tudo",
-        texto: "Sempre que possível, junte dinheiro e pague à vista, evitando pagar juros desnecessários."
-      },
-      {
-        titulo: "Aprenda sobre renda variável",
-        texto: "Estude ações, FIIs e ETFs antes de investir para reduzir riscos e maximizar ganhos."
-      }
-    ];
+  <main class="conteudo">
+    <h1>💡 Dicas para Melhorar sua Saúde Financeira</h1>
 
-    function carregarDicas() {
-      let html = "";
-      dicas.forEach(dica => {
-        html += `
-          <div class="dica">
-            <h3>✅ ${dica.titulo}</h3>
-            <p>${dica.texto}</p>
-          </div>
-        `;
-      });
-      document.getElementById("listaDicas").innerHTML = html;
-    }
+    <div class="card">
+      <h2>1️⃣ Crie um Orçamento Mensal</h2>
+      <p>Organize seus gastos e acompanhe cada entrada e saída para ter controle total sobre suas finanças.</p>
+    </div>
 
-    carregarDicas();
-  </script>
+    <div class="card">
+      <h2>2️⃣ Tenha uma Reserva de Emergência</h2>
+      <p>Guarde pelo menos o equivalente a 6 meses de despesas essenciais para evitar problemas em imprevistos.</p>
+    </div>
+
+    <div class="card">
+      <h2>3️⃣ Evite Dívidas de Juros Altos</h2>
+      <p>Priorize quitar cartões de crédito e empréstimos com altas taxas de juros o quanto antes.</p>
+    </div>
+
+    <div class="card">
+      <h2>4️⃣ Invista no Longo Prazo</h2>
+      <p>Busque opções seguras, como Tesouro Direto, ações de empresas sólidas ou fundos imobiliários.</p>
+    </div>
+
+    <div class="card">
+      <h2>5️⃣ Diversifique sua Carteira</h2>
+      <p>Não coloque todo o seu dinheiro em um único tipo de investimento para reduzir riscos.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 InfoEconomia 24h - Dicas e Educação Financeira</p>
+  </footer>
 </body>
 </html>
