@@ -3,105 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cotações em Tempo Real</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      margin: 0;
-      padding-top: 70px;
-      text-align: center;
-    }
-
-    .menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: #1976d2;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      padding: 15px;
-      z-index: 1000;
-    }
-
-    .menu a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-
-    .menu a:hover {
-      background-color: #0d47a1;
-    }
-
-    .container {
-      background: white;
-      margin: 10px auto;
-      padding: 15px;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #ddd;
-      font-size: 18px;
-    }
-
-    .up {
-      color: green;
-      font-weight: bold;
-    }
-
-    .down {
-      color: red;
-      font-weight: bold;
-    }
-  </style>
+  <title>Cotações do Mercado - InfoEconomia 24h</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="menu">
-    <a href="index.html">🏠 Início</a>
-    <a href="noticias.html">📰 Notícias</a>
-    <a href="cotacoes.html">💹 Cotações</a>
-    <a href="criptomoedas.html">💰 Criptomoedas</a>
-    <a href="dicas.html">📌 Dicas</a>
-    <a href="atualidades.html">🌍 Atualidades</a>
-  </div>
+  <header>
+    InfoEconomia <span>24h 📊📈</span>
+  </header>
 
-  <h1>💹 Cotações de Hoje</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="noticias.html">Notícias</a>
+    <a href="atualidades.html">Atualidades</a>
+    <a href="cotações.html" class="active">Cotações</a>
+    <a href="criptomoedas.html">Criptomoedas</a>
+    <a href="dicas.html">Dicas</a>
+    <a href="financas-pessoais.html">Finanças Pessoais</a>
+    <a href="emprestimos.html">Empréstimos</a>
+    <a href="cartoes.html">Cartões</a>
+    <a href="investimentos.html">Investimentos</a>
+    <a href="comparativos.html">Comparativos</a>
+    <a href="esportes.html">Esportes</a>
+    <a href="politica.html">Política</a>
+    <a href="consorcio.html">Consórcio</a>
+  </nav>
 
-  <div class="container">
-    <div id="dolar" class="item">Carregando dólar...</div>
-    <div id="euro" class="item">Carregando euro...</div>
-    <div id="ibovespa" class="item">Carregando Ibovespa...</div>
-  </div>
+  <main>
+    <section>
+      <h2>💹 Cotações em Tempo Real</h2>
+      <div id="cotacoes">
+        <p>Carregando cotações...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 InfoEconomia 24h - Todos os direitos reservados
+  </footer>
 
   <script>
     async function carregarCotacoes() {
       try {
-        const resposta = await fetch("https://api.hgbrasil.com/finance?format=json-cors&key=5e5cfe0d");
+        const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-BRL,ETH-BRL");
+        const resposta = await fetch(url);
         const dados = await resposta.json();
-        const moedas = dados.results.currencies;
-        const bolsa = dados.results.stocks;
+        const moedas = JSON.parse(dados.contents);
 
-        document.getElementById("dolar").innerHTML = `💵 Dólar: R$ ${moedas.USD.buy.toFixed(2)} <span class="${moedas.USD.variation >= 0 ? 'up' : 'down'}">${moedas.USD.variation}%</span>`;
-        document.getElementById("euro").innerHTML = `💶 Euro: R$ ${moedas.EUR.buy.toFixed(2)} <span class="${moedas.EUR.variation >= 0 ? 'up' : 'down'}">${moedas.EUR.variation}%</span>`;
-        document.getElementById("ibovespa").innerHTML = `📈 Ibovespa: ${bolsa.IBOVESPA.points.toFixed(2)} pts <span class="${bolsa.IBOVESPA.variation >= 0 ? 'up' : 'down'}">${bolsa.IBOVESPA.variation}%</span>`;
-      } catch (error) {
-        document.getElementById("dolar").innerText = "Erro ao carregar dólar.";
-        document.getElementById("euro").innerText = "Erro ao carregar euro.";
-        document.getElementById("ibovespa").innerText = "Erro ao carregar Ibovespa.";
+        let html = `
+          <div class="noticia">💵 Dólar: R$ ${parseFloat(moedas.USDBRL.bid).toFixed(2)}</div>
+          <div class="noticia">💶 Euro: R$ ${parseFloat(moedas.EURBRL.bid).toFixed(2)}</div>
+          <div class="noticia">🪙 Bitcoin: R$ ${parseFloat(moedas.BTCBRL.bid).toFixed(2)}</div>
+          <div class="noticia">🌐 Ethereum: R$ ${parseFloat(moedas.ETHBRL.bid).toFixed(2)}</div>
+        `;
+
+        document.getElementById("cotacoes").innerHTML = html;
+      } catch (e) {
+        document.getElementById("cotacoes").innerHTML = "⚠️ Erro ao carregar cotações.";
       }
     }
 
