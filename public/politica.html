@@ -1,89 +1,56 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notícias de Política</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background-color: #2e7d32;
-      color: #fff;
-      padding: 15px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .conteudo {
-      padding: 20px;
-    }
-    .noticia {
-      background: #fff;
-      padding: 15px;
-      margin: 10px auto;
-      max-width: 600px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .noticia a {
-      text-decoration: none;
-      color: #2e7d32;
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-    .noticia p {
-      margin: 0;
-      color: #555;
-      font-size: 14px;
-    }
-  </style>
+  <title>Política - InfoEconomia 24h</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>📰 Notícias de Política</header>
-  <div class="conteudo" id="listaPolitica">Carregando notícias de política...</div>
+  <!-- Menu de Navegação -->
+  <header class="menu-fixo">
+    <nav>
+      <a href="index.html">🏠 Início</a>
+      <a href="noticias.html">📰 Notícias</a>
+      <a href="atualidades.html">🌐 Atualidades</a>
+      <a href="cotações.html">💹 Cotações</a>
+      <a href="criptomoedas.html">💰 Criptomoedas</a>
+      <a href="financas-pessoais.html">📌 Finanças Pessoais</a>
+      <a href="dicas.html">💡 Dicas</a>
+      <a href="investimentos.html">📈 Investimentos</a>
+      <a href="politica.html" class="ativo">🏛 Política</a>
+      <a href="esportes.html">🏆 Esportes</a>
+      <a href="contato.html">📞 Contato</a>
+    </nav>
+  </header>
 
-  <script>
-    async function carregarPolitica() {
-      try {
-        // Proxy para evitar bloqueio de CORS
-        const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://g1.globo.com/rss/g1/politica/");
-        const resposta = await fetch(url);
-        const dados = await resposta.json();
+  <main class="conteudo">
+    <h1>🏛 Política e Economia</h1>
 
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(dados.contents, "text/xml");
-        const itens = xml.querySelectorAll("item");
-        let html = "";
+    <div class="card">
+      <h2>📌 Impactos das Eleições no Mercado</h2>
+      <p>As eleições podem gerar instabilidade ou otimismo nos mercados, impactando diretamente a bolsa e o câmbio.</p>
+    </div>
 
-        itens.forEach((item, index) => {
-          if (index < 8) { // mostra as 8 principais notícias
-            let titulo = item.querySelector("title").textContent;
-            let link = item.querySelector("link").textContent;
-            let descricao = item.querySelector("description")?.textContent || "Clique para ler a matéria completa.";
-            html += `
-              <div class="noticia">
-                <a href="${link}" target="_blank">${titulo}</a>
-                <p>${descricao}</p>
-              </div>
-            `;
-          }
-        });
+    <div class="card">
+      <h2>📌 Novas Medidas Econômicas</h2>
+      <p>Projetos de lei e mudanças fiscais afetam investimentos, impostos e crescimento do PIB.</p>
+    </div>
 
-        document.getElementById("listaPolitica").innerHTML = html;
-      } catch (e) {
-        document.getElementById("listaPolitica").innerHTML = "⚠️ Erro ao carregar notícias de política.";
-      }
-    }
+    <div class="card">
+      <h2>📌 Política Internacional</h2>
+      <p>Decisões de grandes potências, como EUA e China, influenciam a economia global e o preço das commodities.</p>
+    </div>
 
-    carregarPolitica();
-  </script>
+    <div class="card">
+      <h2>📌 Relação Governo e Mercado</h2>
+      <p>Discursos, decisões do Banco Central e pacotes econômicos podem alterar previsões de crescimento e inflação.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2025 InfoEconomia 24h - Política e Economia</p>
+  </footer>
 </body>
 </html>
