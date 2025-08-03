@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -7,70 +7,36 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
+      background-color: #f5f5f5;
       margin: 0;
-      padding-top: 70px;
+      padding: 20px;
       text-align: center;
     }
-
-    .menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: #1976d2;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      padding: 15px;
-      z-index: 1000;
-    }
-
-    .menu a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-
-    .menu a:hover {
-      background-color: #0d47a1;
-    }
-
     h1 {
-      color: #333;
+      color: #2c3e50;
+      margin-bottom: 20px;
     }
-
     .noticia {
-      background: white;
+      background: #fff;
       margin: 10px auto;
       padding: 10px;
       width: 90%;
-      max-width: 500px;
+      max-width: 600px;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       text-align: left;
     }
-
     .noticia a {
       text-decoration: none;
       color: #1976d2;
       font-weight: bold;
     }
+    .noticia a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <div class="menu">
-    <a href="index.html">🏠 Início</a>
-    <a href="noticias.html">📰 Notícias</a>
-    <a href="cotacoes.html">💹 Cotações</a>
-    <a href="criptomoedas.html">💰 Criptomoedas</a>
-    <a href="dicas.html">📌 Dicas</a>
-    <a href="atualidades.html">🌍 Atualidades</a>
-  </div>
-
   <h1>📰 Últimas Notícias de Economia</h1>
   <div id="listaNoticias">Carregando notícias...</div>
 
@@ -80,22 +46,28 @@
         const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://g1.globo.com/rss/g1/economia/");
         const resposta = await fetch(url);
         const dados = await resposta.json();
+
+        if (!dados.contents) {
+          throw new Error("Erro ao buscar conteúdo");
+        }
+
         const parser = new DOMParser();
         const xml = parser.parseFromString(dados.contents, "text/xml");
         const itens = xml.querySelectorAll("item");
         let html = "";
 
         itens.forEach((item, index) => {
-          if (index < 8) {
-            let titulo = item.querySelector("title").textContent;
-            let link = item.querySelector("link").textContent;
+          if (index < 10) { // mostra 10 notícias
+            let titulo = item.querySelector("title")?.textContent || "Sem título";
+            let link = item.querySelector("link")?.textContent || "#";
             html += `<div class='noticia'><a href="${link}" target="_blank">${titulo}</a></div>`;
           }
         });
 
-        document.getElementById("listaNoticias").innerHTML = html;
+        document.getElementById("listaNoticias").innerHTML = html || "Nenhuma notícia encontrada.";
       } catch (e) {
         document.getElementById("listaNoticias").innerHTML = "Erro ao carregar notícias.";
+        console.error("Erro:", e);
       }
     }
 
