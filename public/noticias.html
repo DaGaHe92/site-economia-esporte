@@ -3,42 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Últimas Notícias de Economia</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      color: #2c3e50;
-      margin-bottom: 20px;
-    }
-    .noticia {
-      background: #fff;
-      margin: 10px auto;
-      padding: 10px;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .noticia a {
-      text-decoration: none;
-      color: #1976d2;
-      font-weight: bold;
-    }
-    .noticia a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <title>Últimas Notícias - InfoEconomia 24h</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>📰 Últimas Notícias de Economia</h1>
-  <div id="listaNoticias">Carregando notícias...</div>
+  <header>
+    InfoEconomia <span>24h 📊📈</span>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="noticias.html" class="active">Notícias</a>
+    <a href="atualidades.html">Atualidades</a>
+    <a href="cotações.html">Cotações</a>
+    <a href="criptomoedas.html">Criptomoedas</a>
+    <a href="dicas.html">Dicas</a>
+    <a href="financas-pessoais.html">Finanças Pessoais</a>
+    <a href="emprestimos.html">Empréstimos</a>
+    <a href="cartoes.html">Cartões</a>
+    <a href="investimentos.html">Investimentos</a>
+    <a href="comparativos.html">Comparativos</a>
+    <a href="esportes.html">Esportes</a>
+    <a href="politica.html">Política</a>
+    <a href="consorcio.html">Consórcio</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>📰 Últimas Notícias de Economia</h2>
+      <div id="listaNoticias">Carregando notícias...</div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 InfoEconomia 24h - Todos os direitos reservados
+  </footer>
 
   <script>
     async function carregarNoticias() {
@@ -46,28 +45,22 @@
         const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://g1.globo.com/rss/g1/economia/");
         const resposta = await fetch(url);
         const dados = await resposta.json();
-
-        if (!dados.contents) {
-          throw new Error("Erro ao buscar conteúdo");
-        }
-
         const parser = new DOMParser();
         const xml = parser.parseFromString(dados.contents, "text/xml");
         const itens = xml.querySelectorAll("item");
         let html = "";
 
         itens.forEach((item, index) => {
-          if (index < 10) { // mostra 10 notícias
-            let titulo = item.querySelector("title")?.textContent || "Sem título";
-            let link = item.querySelector("link")?.textContent || "#";
+          if (index < 10) {
+            let titulo = item.querySelector("title").textContent;
+            let link = item.querySelector("link").textContent;
             html += `<div class='noticia'><a href="${link}" target="_blank">${titulo}</a></div>`;
           }
         });
 
-        document.getElementById("listaNoticias").innerHTML = html || "Nenhuma notícia encontrada.";
+        document.getElementById("listaNoticias").innerHTML = html;
       } catch (e) {
-        document.getElementById("listaNoticias").innerHTML = "Erro ao carregar notícias.";
-        console.error("Erro:", e);
+        document.getElementById("listaNoticias").innerHTML = "⚠️ Erro ao carregar notícias.";
       }
     }
 
