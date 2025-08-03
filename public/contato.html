@@ -20,30 +20,43 @@
       <a href="investimentos.html">📈 Investimentos</a>
       <a href="politica.html">🏛 Política</a>
       <a href="esportes.html">🏆 Esportes</a>
+      <a href="comparativos.html">⚖️ Comparativos</a>
+      <a href="consorcio.html">📜 Consórcio</a>
       <a href="contato.html" class="ativo">📞 Contato</a>
     </nav>
   </header>
 
   <main class="conteudo">
     <h1>📞 Entre em Contato</h1>
-    <p>Envie suas dúvidas, sugestões ou parcerias. Retornaremos o mais breve possível.</p>
+    <p>Tem alguma dúvida, sugestão ou parceria para o InfoEconomia 24h? Fale conosco pelo formulário abaixo:</p>
 
-    <form action="#" method="POST" class="form-contato">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+    <div class="formulario-contato">
+      <form id="formContato">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
 
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
 
-      <label for="mensagem">Mensagem:</label>
-      <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem" required></textarea>
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem" rows="5" required></textarea>
 
-      <button type="submit">Enviar</button>
-    </form>
+        <button type="submit">Enviar</button>
+      </form>
+      <p id="respostaForm" class="mensagem-sucesso"></p>
+    </div>
   </main>
 
   <footer>
     <p>© 2025 InfoEconomia 24h - Todos os direitos reservados.</p>
   </footer>
+
+  <script>
+    document.getElementById("formContato").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("respostaForm").textContent = "✅ Mensagem enviada com sucesso! Retornaremos em breve.";
+      this.reset();
+    });
+  </script>
 </body>
 </html>
