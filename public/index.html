@@ -1,49 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InfoEconomia 24h</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="InfoEconomia 24h - Notícias, cotações, investimentos, criptomoedas e muito mais, em tempo real.">
+    <title>InfoEconomia 24h</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>📊 InfoEconomia 24h</h1>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="cotacoes.html">Cotações</a>
-      <a href="criptomoedas.html">Criptomoedas</a>
-      <a href="noticias.html">Notícias</a>
-      <a href="financas.html">Finanças Pessoais</a>
-      <a href="emprestimos.html">Empréstimos</a>
-      <a href="cartoes.html">Cartões</a>
-      <a href="comparativos.html">Comparativos</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="intro">
-      <h2>Bem-vindo ao InfoEconomia 24h 🚀</h2>
-      <p>
-        Acompanhe as últimas notícias do mercado financeiro, cotações, 
-        criptomoedas, dicas de investimentos, comparativos de serviços 
-        financeiros e muito mais em um único lugar.
-      </p>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <span class="icon">📊</span>
+            <h1>InfoEconomia <span>24h</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="atualidades.html">Atualidades</a></li>
+                <li><a href="criptomoedas.html">Criptomoedas</a></li>
+                <li><a href="consorcio.html">Consórcio</a></li>
+                <li><a href="politica.html">Política</a></li>
+                <li><a href="esportes.html">Esportes</a></li>
+                <li><a href="financas-pessoais.html">Finanças Pessoais</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Cotações -->
+    <section class="cotacoes">
+        <div class="cotacao-item"><strong>IBOVESPA</strong> 125.338 <span class="up">+0,37%</span></div>
+        <div class="cotacao-item"><strong>Dólar</strong> 5,25 <span class="down">-0,17%</span></div>
+        <div class="cotacao-item"><strong>Ouro</strong> 316,45 <span class="down">-0,11%</span></div>
+        <div class="cotacao-item"><strong>Bitcoin</strong> 66.764 <span class="up">+0,49%</span></div>
+        <div class="cotacao-item"><strong>Contrato Futuro</strong> 6.120 <span class="up">+0,10%</span></div>
     </section>
 
-    <section class="destaques">
-      <h3>📌 Destaques</h3>
-      <ul>
-        <li>📈 Ibovespa fecha em alta impulsionado por bancos</li>
-        <li>💰 Dólar oscila com cenário externo e expectativa de juros</li>
-        <li>🏦 Novas oportunidades em consórcios e financiamentos</li>
-        <li>🪙 Bitcoin e Ethereum têm forte valorização no dia</li>
-      </ul>
-    </section>
-  </main>
+    <!-- Notícias -->
+    <main>
+        <h2>Últimas Notícias</h2>
+        <ul class="noticias-lista">
+            <li>📌 Inflação desacelera em abril, mas alimentos continuam em alta</li>
+            <li>📌 Novas regras tributárias para pequenas empresas entram em vigor</li>
+            <li>📌 Análise: Crescimento econômico surpreende no primeiro trimestre</li>
+        </ul>
 
-  <footer>
-    <p>&copy; 2025 InfoEconomia 24h - Todos os direitos reservados</p>
-  </footer>
+        <div class="grid-secoes">
+            <div class="secao">
+                <h3>Criptomoedas</h3>
+                <ul>
+                    <li>Bitcoin 331.743 <span class="up">+0,5%</span></li>
+                    <li>Ethereum 17.418 <span class="up">+0,4%</span></li>
+                    <li>Tether 5,26 <span class="down">-0,6%</span></li>
+                    <li>Contrato Futuro 6.120 <span class="up">+0,1%</span></li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>Atualidades</h3>
+                <ul>
+                    <li>Indicadores de confiança mostram queda no otimismo do empresário</li>
+                    <li>Mercado imobiliário cresce com demanda por imóveis residenciais</li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>Consórcio</h3>
+                <ul>
+                    <li>Como fazer um consórcio de veículos e suas vantagens</li>
+                    <li>Simule e descubra: tabela de consórcio de imóveis</li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>Esportes</h3>
+                <ul>
+                    <li>Campeonato Brasileiro: tudo sobre a rodada do fim de semana</li>
+                    <li>Atacante brilha e garante vitória em clássico regional</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2025 InfoEconomia 24h - Todos os direitos reservados</p>
+    </footer>
+
 </body>
 </html>
