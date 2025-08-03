@@ -3,49 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atualidades do Mercado</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background-color: #004d40;
-      color: #fff;
-      padding: 15px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .conteudo {
-      padding: 20px;
-    }
-    .noticia {
-      background: #fff;
-      padding: 15px;
-      margin: 10px auto;
-      max-width: 600px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .noticia a {
-      text-decoration: none;
-      color: #004d40;
-      font-weight: bold;
-    }
-  </style>
+  <title>Atualidades do Mercado - InfoEconomia 24h</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>🌐 Atualidades do Mercado</header>
-  <div class="conteudo" id="listaAtualidades">Carregando atualidades...</div>
+  <header>
+    InfoEconomia <span>24h 📊📈</span>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="noticias.html">Notícias</a>
+    <a href="atualidades.html" class="active">Atualidades</a>
+    <a href="cotações.html">Cotações</a>
+    <a href="criptomoedas.html">Criptomoedas</a>
+    <a href="dicas.html">Dicas</a>
+    <a href="financas-pessoais.html">Finanças Pessoais</a>
+    <a href="emprestimos.html">Empréstimos</a>
+    <a href="cartoes.html">Cartões</a>
+    <a href="investimentos.html">Investimentos</a>
+    <a href="comparativos.html">Comparativos</a>
+    <a href="esportes.html">Esportes</a>
+    <a href="politica.html">Política</a>
+    <a href="consorcio.html">Consórcio</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>🌍 Atualidades do Mercado</h2>
+      <div id="listaAtualidades">Carregando atualizações...</div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 InfoEconomia 24h - Todos os direitos reservados
+  </footer>
 
   <script>
     async function carregarAtualidades() {
       try {
-        const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://g1.globo.com/rss/g1/");
+        const url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://economia.uol.com.br/ultimas/index.xml");
         const resposta = await fetch(url);
         const dados = await resposta.json();
         const parser = new DOMParser();
@@ -54,7 +51,7 @@
         let html = "";
 
         itens.forEach((item, index) => {
-          if (index < 7) {
+          if (index < 10) {
             let titulo = item.querySelector("title").textContent;
             let link = item.querySelector("link").textContent;
             html += `<div class='noticia'><a href="${link}" target="_blank">${titulo}</a></div>`;
@@ -63,7 +60,7 @@
 
         document.getElementById("listaAtualidades").innerHTML = html;
       } catch (e) {
-        document.getElementById("listaAtualidades").innerHTML = "Erro ao carregar atualidades.";
+        document.getElementById("listaAtualidades").innerHTML = "⚠️ Erro ao carregar atualidades.";
       }
     }
 
