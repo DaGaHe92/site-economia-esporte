@@ -1,1 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Fonte padrão */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+/* Links */
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Navbar */
+nav {
+  background-color: #1b3a2f; /* Verde militar escuro */
+}
+
+/* Cabeçalhos */
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+  color: #1b3a2f;
+}
+
+/* Cartões de notícia */
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 10px 0;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão padrão */
+.btn {
+  background-color: #1b3a2f;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #145a40;
+}
